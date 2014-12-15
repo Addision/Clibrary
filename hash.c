@@ -38,6 +38,8 @@ unsigned long HashString( char *lpszFileName, unsigned long dwHashType )
     return seed1;   
 }
 
+/*key为一个字符串，nTableLength为哈希表的长度
+ *该函数得到的hash值分布比较均匀*/
 unsigned long getHashIndex( const char *key, int nTableLength )
 {
     unsigned long nHash = 0;
@@ -47,6 +49,55 @@ unsigned long getHashIndex( const char *key, int nTableLength )
     }
     return (nHash % nTableLength);
 }
+
+/*lpszString为要在hash表中查找的字符串；lpTable为存储字符串hash值的hash表；nTableSize 为hash表的长度： */
+
+
+
+int GetHashTablePos_easy( har *lpszString, SOMESTRUCTURE *lpTable ) 
+//lpszString要在Hash表中查找的字符串，lpTable为存储字符串Hash值的Hash表。
+{ 
+    int nHash = HashString(lpszString);  //调用上述函数二，返回要查找字符串lpszString的Hash值。
+    int nHashPos = nHash % nTableSize; 
+    if ( lpTable[nHashPos].bExists  &&  !strcmp( lpTable[nHashPos].pString, lpszString ) ) 
+		//如果找到的Hash值在表中存在，且要查找的字符串与表中对应位置的字符串相同
+    {  
+        return nHashPos;    //则返回上述调用函数二后，找到的Hash值
+    } 
+    else
+    {
+        return -1;  
+    } 
+}
+
+
+int GetHashTablePos( char *lpszString, MPQHASHTABLE *lpTable, int nTableSize )
+{
+    const int  HASH_OFFSET = 0, HASH_A = 1, HASH_B = 2;
+    int  nHash = HashString(lpszString, HASH_OFFSET);
+    int  nHashA = HashString(lpszString, HASH_A);
+    int  nHashB = HashString(lpszString, HASH_B);
+    int  nHashStart = nHash % nTableSize;
+    int  nHashPos = nHashStart; 
+    while ( lpTable[nHashPos].bExists )
+	{
+		/* 如果仅仅是判断在该表中时候存在这个字符串，就比较这两个hash值就可以了，不用对结构体中的字符串进行比较。这样会加快运行的速度？减少hash表占用的空间？这种
+		   方法一般应用在什么场合？*/
+		if (lpTable[nHashPos].nHashA == nHashA
+			&&  lpTable[nHashPos].nHashB == nHashB )
+		{
+            return nHashPos;
+		}
+		else
+		{
+            nHashPos = (nHashPos + 1) % nTableSize;
+		}
+        if (nHashPos == nHashStart) break;
+    }
+	return -1;
+}
+
+
 //在main中测试argv[1]的三个hash值：  
 //./hash  "arr/units.dat"  
 //./hash  "unit/neutral/acritter.grp"  

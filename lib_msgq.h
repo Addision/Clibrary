@@ -27,7 +27,9 @@ struct msg_s
 	char msgtext[LEN];
 };
 //function spacefied
+//flag 默认为 IPC_CREAT | 0666
 int lib_msgq_init(char *filename, int id, int msgflag);
+int lib_msgq_send(int msgid, const void *msgp, size_t msgsz, int msgflg);
 int lib_msgq_rcv(int msqid, void *msgp, size_t msgsz, long msgtyp,int msgflg);
 int lib_msgq_free(int msqid);
 int lib_msgq_stat(int msqid,  struct msqid_ds *info);
