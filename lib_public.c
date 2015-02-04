@@ -80,5 +80,15 @@ void lib_get_record(char *out, char *in, int num, char *esc)
 	out[len] = '\0';
 }
 
+int lib_test_net(const char *ipaddr)
+{
+	int ret = -1;
+	char cmd[50]="ping ";
+	strcat(cmd, ipaddr);
+	strcat(cmd, " -c 1 > /dev/null");
+	if(!system(cmd))
+	   ret = 0;
+	return ret;
+}
 
 
