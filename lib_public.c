@@ -1,11 +1,11 @@
 #include "lib_public.h"
 
-int lib_time_now(char *outtime, int flag)
+char* lib_time_now(char *outtime, int flag)
 {
 	time_t now_t;
 	struct tm *now_tm;
-	if(NULL == time)
-		return -1;
+	if(NULL == outtime)
+	   return NULL;
 	now_t = time(NULL);
 	now_tm = localtime(&now_t);
 
@@ -13,6 +13,7 @@ int lib_time_now(char *outtime, int flag)
 		strftime(outtime, 20, "%Y-%m-%d %H:%M:%S", now_tm);
 	else
 		strftime(outtime, 15, "%Y%m%d%H%M%S", now_tm);
+	return outtime;
 }
 // Description :	计算CRC,多项式为G(x)＝x16＋x12＋x5＋1, 按半子节计算
 //	* input : 		*check_start_acp:	待校验数据的起始指针
@@ -50,7 +51,7 @@ void lib_write_log(const char *logpath, char *format,...)
 	FILE *fp;
 	va_list args;
 	fp = fopen(logpath, "a+");
-    va_start(args, format);
+	va_start(args, format);
 	vfprintf(fp, format, args);
 	va_end(args);
 	fflush(fp);
