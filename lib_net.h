@@ -21,5 +21,5 @@ int lib_tcp_send(int sock, char *sendbuf, int len);
 int lib_tcp_recv(int sock, char *recvbuf, int len, int timeout);
 int lib_tcp_free(int sock);
 
-
+int lib_set_nonblock(int sock);
 
