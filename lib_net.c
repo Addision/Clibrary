@@ -208,4 +208,13 @@ int lib_tcp_free(int sock)
 	return (ret==0) ? 0 : -1;
 }
 
+int lib_set_nonblock(int sock)
+{
+	int old_fd = fcntl(sock, F_GETFL);
+        if(old_fd < 0)
+          return -1;
+        if(fcntl(sock, F_SETFL, old_fd|O_NONBLOCK) < 0)
+          return -1;
 
+        return old_fd;                 
+}

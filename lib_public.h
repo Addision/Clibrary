@@ -17,3 +17,17 @@ int lib_separate_record(char **field,char *out, char sepsection, char seprecord,
 void lib_get_record(char *out, char *in, int num, char *esc);
 //将返回执行的一条结果
 void lib_exec_cmd(const char *cmd, char *result);
+//利用ping测试网络
+int lib_test_net(const char *ipaddr);
+
+
+
+
+
+
+
+
+
+
+
+
