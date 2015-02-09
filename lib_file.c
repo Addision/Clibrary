@@ -1,5 +1,5 @@
 /*
- * Filename: lib_file.c
+ * Filename:     lib_file.c
  *                
  * Version:       0.1
  * Author:        LaiJia <laijia2008@126.com>
@@ -510,3 +510,4 @@ int	lib_file_getxmlnode(char *outbuffer, char *inbuffer, int i, char *delim,char
 	free(blanktoken);
 	return	1;
 }
+
