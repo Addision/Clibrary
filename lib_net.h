@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <arpa/inet.h>
+#include <fcntl.h>
 //udp
 int lib_udpsrv_init(const char *ipaddr, int port);
 int lib_udpsrv_free(int sockfd);
