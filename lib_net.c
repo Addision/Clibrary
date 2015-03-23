@@ -218,3 +218,18 @@ int lib_set_nonblock(int sock)
 
         return old_fd;                 
 }
+
+int lib_host2ip(const char *hostname, char *ip)
+{
+	struct hostent *ht;
+	if((ht = gethostbyname(hostname)) == NULL)
+	{
+   		return -1;
+	}
+	strcpy(ip, inet_ntoa(*(struct in_addr*)ht->h_addr));
+	if(ip == NULL)
+	{
+		return -1;
+	}
+	return 0;
+}

@@ -23,4 +23,4 @@ int lib_tcp_recv(int sock, char *recvbuf, int len, int timeout);
 int lib_tcp_free(int sock);
 
 int lib_set_nonblock(int sock);
-
+int lib_host2ip(const char *hostname, char *ip);
