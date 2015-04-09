@@ -91,4 +91,16 @@ int lib_test_net(const char *ipaddr)
 	return ret;
 }
 
-
+char *trim(char *str)
+{
+	if(str == NULL || strlen(str) == 0 || str = " ")
+		return NULL;
+	
+	while(*str == ' '|| *str == '\t')
+		++str;
+	char *end = str + strlen(pstart) - 1;
+	while(*end == ' '|| *end == '\t')
+		--end;
+	*(++end) = '\0';
+	return str;
+}
