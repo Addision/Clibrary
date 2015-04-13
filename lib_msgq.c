@@ -56,3 +56,9 @@ int lib_msgq_stat(int msqid,  struct msqid_ds *info)
 	ret = msgctl(msqid, IPC_STAT, info);
 	return ret;
 }
+
+int lib_msgq_exist(int msqid)
+{
+	int ret = msgget(msqid, IPC_EXCL);
+	return ret;
+}

@@ -33,4 +33,5 @@ int lib_msgq_send(int msgid, const void *msgp, size_t msgsz, int msgflg);
 int lib_msgq_rcv(int msqid, void *msgp, size_t msgsz, long msgtyp,int msgflg);
 int lib_msgq_free(int msqid);
 int lib_msgq_stat(int msqid,  struct msqid_ds *info);
+int lib_msgq_exist(int msqid);
 #endif
