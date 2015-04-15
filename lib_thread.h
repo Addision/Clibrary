@@ -3,6 +3,7 @@
 // 1 the detach thread
 int lib_thread_create(pthread_t *threadid, void *pfunction, void *arg, int flag);
 void lib_thread_exit(void);
+int lib_thread_exist(pthread_t threadid);
 int lib_thread_cancel(pthread_t threadid);
 pthread_t lib_thread_getself(void);
 int lib_thread_join(pthread_t threadid);

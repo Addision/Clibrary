@@ -29,6 +29,15 @@ void lib_thread_exit(void)
 	pthread_exit((void*)0);
 }
 
+int lib_thread_exist(pthread_t threadid)
+{
+	int thread_error = pthread_kill(threadid, 0);
+	if(thread_error = ESRCH)
+	{
+		return -1;
+	}
+	return 0;
+}
 int lib_thread_cancel(pthread_t threadid)
 {
 	int ret = 0;
@@ -85,3 +94,4 @@ int lib_mutex_destroy(pthread_mutex_t *mutex)
 
 	return (ret == 0) ? 0 : -1;
 }
+
