@@ -104,3 +104,30 @@ char *trim(char *str)
 	*(++end) = '\0';
 	return str;
 }
+
+int checkeprogram(const char* shellstr, const char* str)
+{
+	int live = 0;
+	char line[120];
+	FILE* fp = popen(shellstr, "r");
+	if(fp == NULL)
+	{
+		cout << "popen error\n";
+		return -1;
+	}
+	while(!feof(fp)){
+		memset(line, 0, sizeof(line));
+		fgets(line, sizeof(line), fp);
+		if(strstr(line, str) != NULL){
+			live++;
+			if(live == 2){
+				break;
+			}
+		}
+	}
+	pclose(fp);
+	if(live == 2){
+		return 1;
+	}
+	return 0;
+}

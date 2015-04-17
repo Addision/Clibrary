@@ -20,7 +20,7 @@ void lib_exec_cmd(const char *cmd, char *result);
 //利用ping测试网络
 int lib_test_net(const char *ipaddr);
 char *trim(char *str);
-
+int checkeprogram(const char* shellstr, const char* str);
 
 
 
