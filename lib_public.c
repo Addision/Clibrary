@@ -93,12 +93,12 @@ int lib_test_net(const char *ipaddr)
 
 char *trim(char *str)
 {
-	if(str == NULL || strlen(str) == 0 || str = " ")
+	if(str == NULL || strlen(str) == 0 || strcmp(str, " ")==0)
 		return NULL;
 	
 	while(*str == ' '|| *str == '\t')
 		++str;
-	char *end = str + strlen(pstart) - 1;
+	char *end = str + strlen(str) - 1;
 	while(*end == ' '|| *end == '\t')
 		--end;
 	*(++end) = '\0';
@@ -112,7 +112,7 @@ int checkeprogram(const char* shellstr, const char* str)
 	FILE* fp = popen(shellstr, "r");
 	if(fp == NULL)
 	{
-		cout << "popen error\n";
+		fprintf(stderr, "popen error\n");
 		return -1;
 	}
 	while(!feof(fp)){
