@@ -46,19 +46,19 @@ char* lib_time_datespan(char* outday, char *inday, int span, char separator/*=-*
 	if(sscanf(inday, "%04d-%02d-%02d", &day.tm_year, &day.tm_mon, &day.tm_mday) == 3)
 	{
 		day.tm_year -= 1900;
-		day.tm_mon -=1;
+		day.tm_mon -= 1;
 		now = mktime(&day);
 	}
 	else if(sscanf(inday, "%04d/%02d/%02d", &day.tm_year, &day.tm_mon, &day.tm_mday) == 3)
 	{
 		day.tm_year -= 1900;
-		day.tm_mon -=1;
+		day.tm_mon -= 1;
 		now = mktime(&day);
 	}
     else if(sscanf(inday, "%04d%02d%02d", &day.tm_year, &day.tm_mon, &day.tm_mday) == 3)
 	{
 		day.tm_year -= 1900;
-		day.tm_mon -=1;
+		day.tm_mon -= 1;
 		now = mktime(&day);
 	}
 	now += span*3600*24;
